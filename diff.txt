@@ -1,8 +1,0 @@
-+--------+----------+----------+------+---------+--------------+
-| Domain | Method   | URI      | Name | Action  | Middleware   |
-+--------+----------+----------+------+---------+--------------+
-|        | GET|HEAD | /        |      | Closure | web          |
-|        | GET|HEAD | 12345    |      | Closure | web          |
-|        | GET|HEAD | ID/{id}  |      | Closure | web          |
-|        | GET|HEAD | api/user |      | Closure | api,auth:api |
-+--------+----------+----------+------+---------+--------------+
