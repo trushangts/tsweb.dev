@@ -26,4 +26,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function saveUser($data)
+    {
+        //$this->user_id = auth()->user()->id;
+        $this->name = $data['name'];
+        $this->role = $data['role'];
+        $this->email = $data['email'];
+        $this->phone = $data['phone'];
+        $this->password = $data['password'];
+        $this->save();
+        return 1;
+    }
 }

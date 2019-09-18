@@ -15,10 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test', function () {
+    return view('dashboard');
+});
+
 Auth::routes();
+Auth::routes();
+Route::get('/employee', 'HomeController@employee')->name('home');
+Route::get('/adduser', 'HomeController@addUser')->name('adduser');
+Route::post('/saveuser', 'HomeController@store')->name('saveuser');
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
