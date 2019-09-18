@@ -18,6 +18,8 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+   protected $table = 'users'; 
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -37,5 +39,9 @@ class User extends Authenticatable
         $this->password = $data['password'];
         $this->save();
         return 1;
+    }
+
+    public function departments(){
+        return $this->hasOne('App\Departments','id');            
     }
 }

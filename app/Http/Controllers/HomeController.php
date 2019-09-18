@@ -24,12 +24,16 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // $users = User::find(1);
+        // dd($users->departments->name);
+        // dd($users->departments->name);        
+        // exit;
         return view('home');
     }
 
     public function employee()
     {   
-        $users = User::whereIn('role',[2,3])->get();;
+        $users = User::whereIn('role',[2,3])->with('departments')->get();
         return view('employee.list',compact('users'));
     }
     

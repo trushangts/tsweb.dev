@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPhotoUsers extends Migration
+class UserTableAdd extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,9 @@ class AddPhotoUsers extends Migration
     public function up()
     {
         Schema::table('users', function($table) {
-            $table->string('photo')->after('status')->nullable();
-          });
+            $table->integer('dept_id')->unsigned()->index()->after('photo')->nullable();
+            $table->foreign('dept_id')->references('id')->on('departments');            
+        });
     }
 
     /**
@@ -26,7 +27,7 @@ class AddPhotoUsers extends Migration
     public function down()
     {
         Schema::table('users', function($table) {
-            $table->dropColumn('photo');
+            $table->dropColumn('dept_id');
         });
     }
 }
