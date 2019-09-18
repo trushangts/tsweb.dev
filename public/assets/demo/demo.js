@@ -232,6 +232,22 @@ demo = {
 
     // To add the marker to the map, call setMap();
     marker.setMap(map);
+  },
+
+  showNotification: function(from, align,msg = "",color = "success") {
+    type = ['', 'info', 'danger', 'success', 'warning', 'rose', 'primary'];
+    $.notify({
+      icon: "add_alert",
+      message: msg
+
+    }, {
+      type: color,
+      timer: 3000,
+      placement: {
+        from: from,
+        align: align
+      }
+    });
   }
 
 }
