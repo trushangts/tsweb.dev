@@ -42,7 +42,7 @@
                                                 {{$user->phone}}
                                             </td>
                                             <td class="text-primary">
-                                                -
+                                                {{isset($user->departments->name) ? $user->departments->name : "-"}}
                                             </td>
                                             <td class="text-primary">
                                                 <a href="" class="btn btn-info btn-sm">View</a>

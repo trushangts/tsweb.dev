@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Department;
+use App\Departments;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
-{
+{   
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,8 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        //
+        $departments = Departments::get();
+        return view('department.list',compact('departments'));
     }
 
     /**
@@ -24,7 +30,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('department.add');
     }
 
     /**
@@ -35,7 +41,15 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->input());
+        $department = new Departments();
+        $data = $this->validate($request, [
+            'name'=>'required',
+            'status'=> 'required'            
+        ]);
+       
+        $department->saveDepartment($data);
+        return redirect('/home')->with('success', 'Department Added Sucessfully.');
     }
 
     /**

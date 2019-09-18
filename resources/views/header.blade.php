@@ -55,6 +55,13 @@
               <p>Employee</p>
             </a>
           </li>
+
+          <li class="nav-item {{ set_active(['department*']) }}">
+            <a class="nav-link" href="{{ URL::to('/department') }}">
+              <i class="material-icons">dashboard</i>
+              <p>Department</p>
+            </a>
+          </li>
           
         
         </ul>
