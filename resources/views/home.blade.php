@@ -107,10 +107,3 @@
 <!-- Page container end -->
 
 @include('footer')
-
-@if (session('success'))
-    <script>
-      var msg = '{{ session('success') }}';
-      demo.showNotification('top','right',msg,'success');
-    </script>
-@endif

@@ -11,18 +11,21 @@
                <div class="card ">
                   <div class="card-header card-header-primary card-header-text">
                      <div class="card-text">
-                        <h4 class="card-title">New Registration</h4>
+                        <h4 class="card-title">Update Employee</h4>
                      </div>
                   </div>
                   <div class="card-body ">
-                  
-               <form method="post" action="{{ route('saveuser') }}" class="form-horizontal">
+               
+               <div id="debuge" style="display:none;">
+               <pre>{{$user}}{{$department}}</pre>
+               </div>
+               <form method="post" action="{{ route('employee.update',$user->id) }}" class="form-horizontal">
                      {{ csrf_field() }}            
                         <div class="row">
                            <label class="col-sm-2 col-form-label">Name</label>
                            <div class="col-sm-10">
                               <div class="form-group bmd-form-group">
-                                 <input type="text" class="form-control" name="name" id="name">
+                                 <input type="text" class="form-control" name="name" id="name" value="{{$user->name}}">
                                  <span class="bmd-help">A block of help text that breaks onto a new line.</span>
                               </div>
                            </div>
@@ -33,10 +36,10 @@
                            <div class="col-sm-10">
                               <div class="form-group bmd-form-group">
                                  <div class="dropdown bootstrap-select">
-                                    <select class="selectpicker" name="role" id="role" data-style="select-with-transition"  title="Choose Department" data-size="7" tabindex="-98">
+                                    <select class="selectpicker" name="department_id" id="department_id" data-style="select-with-transition"  title="Choose Department" data-size="7" tabindex="-98">
                                        <option disabled=""> Select Options</option>
                                        @foreach($department as $d)
-                                       <option value="{{$d->id}}">{{$d->name}}</option>
+                                       <option value="{{$d->id}}" {{$d->id == $user->department_id ? 'selected' : ''}}>{{$d->name}}</option>
                                        @endforeach
                                     </select>
                                  </div>
@@ -48,7 +51,7 @@
                            <label class="col-sm-2 col-form-label">Email ID</label>
                            <div class="col-sm-10">
                               <div class="form-group bmd-form-group">
-                                 <input type="text" class="form-control" name="email" id="email">
+                                 <input type="text" class="form-control" name="email" id="email" value="{{$user->email}}">
                                  <span class="bmd-help">A block of help text that breaks onto a new line.</span>
                               </div>
                            </div>
@@ -58,13 +61,13 @@
                            <label class="col-sm-2 col-form-label">Phone</label>
                            <div class="col-sm-10">
                               <div class="form-group bmd-form-group">
-                                 <input type="text" class="form-control" name="phone" id="phone">
+                                 <input type="text" class="form-control" name="phone" id="phone" value="{{$user->phone}}">
                                  <span class="bmd-help">A block of help text that breaks onto a new line.</span>
                               </div>
                            </div>
                         </div>
 
-                        <div class="row">
+                        <!-- <div class="row">
                            <label class="col-sm-2 col-form-label">Password</label>
                            <div class="col-sm-10">
                               <div class="form-group bmd-form-group">
@@ -72,7 +75,7 @@
                                  <span class="bmd-help">A block of help text that breaks onto a new line.</span>
                               </div>
                            </div>
-                        </div>
+                        </div> -->
 
                         <!-- <div class="row">
                            <label class="col-sm-2 col-form-label">Photo</label>

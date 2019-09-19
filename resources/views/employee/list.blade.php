@@ -1,3 +1,4 @@
+@php $pageName = "Employee List" @endphp
 @include('header')
 <!-- Page container start -->
 <div class="main-panel">
@@ -9,10 +10,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header card-header-primary">
-                            <h4 class="card-title ">Employee List</h4>
-                            <p class="card-category">Information</p>
-                        </div>
+                        <div class="card-header card-header-primary card-header-text">
+                            <div class="card-text">
+                                <h4 class="card-title">Employee List</h4>                                
+                            </div>
+                        </div>                        
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table" id="emp_list">
@@ -30,7 +32,7 @@
                                         @foreach($users as $user)
                                         <tr>
                                             <td>
-                                                1
+                                                1                                                
                                             </td>
                                             <td>
                                                 {{$user->name}}
@@ -39,13 +41,13 @@
                                                 {{$user->email}}
                                             </td>
                                             <td>
-                                                {{$user->phone}}
+                                                {{$user->phone}}                                                
                                             </td>
                                             <td class="text-primary">
                                                 {{isset($user->departments->name) ? $user->departments->name : "-"}}
                                             </td>
                                             <td class="text-primary">
-                                                <a href="" class="btn btn-info btn-sm">View</a>
+                                                <a href="{{route('empsingleview',$user->id)}}" class="btn btn-info btn-sm">Edit</a>
                                                 <a href="" class="btn btn-danger btn-sm">Delete</a>
                                             </td>
                                         </tr>
