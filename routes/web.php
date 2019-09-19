@@ -25,7 +25,8 @@ Route::get('/employee', 'HomeController@employee')->name('employee.list');
 Route::get('/adduser', 'HomeController@addUser')->name('adduser');
 Route::post('/saveuser', 'HomeController@store')->name('saveuser');
 Route::get('/employee/{id}', 'HomeController@viewUser')->name('empsingleview');
-Route::post('/employee/{id}', 'HomeController@updateUser')->name('employee.update');
+Route::post('/employee/{id}', 'HomeController@update')->name('employee.update');
+Route::delete('/employee/{id}', 'HomeController@destroy')->name('employee.delete');
 
 Route::get('/department', 'DepartmentController@index')->name('Departments');
 Route::get('/add_department', 'DepartmentController@create')->name('Departments');

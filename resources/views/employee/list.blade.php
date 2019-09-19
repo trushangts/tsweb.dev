@@ -29,10 +29,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php $id = 1; @endphp
                                         @foreach($users as $user)
                                         <tr>
                                             <td>
-                                                1                                                
+                                                {{$id}}                                             
                                             </td>
                                             <td>
                                                 {{$user->name}}
@@ -48,9 +49,15 @@
                                             </td>
                                             <td class="text-primary">
                                                 <a href="{{route('empsingleview',$user->id)}}" class="btn btn-info btn-sm">Edit</a>
-                                                <a href="" class="btn btn-danger btn-sm">Delete</a>
+                                                <!-- <a href="" class="btn btn-danger btn-sm">Delete</a> -->
+                                                <form action="{{ route('employee.delete', $user->id)}}" method="post">
+                                                    {{ csrf_field() }}            
+                                                    <input type="hidden" name="_method" value="DELETE" >
+                                                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                                                </form>
                                             </td>
                                         </tr>
+                                        @php $id++; @endphp
                                         @endforeach
                                     </tbody>
                                 </table>

@@ -35,7 +35,6 @@ class HomeController extends Controller
     public function employee()
     {   
         $users = User::whereIn('role',[2,3])->with('departments')->get();
-        // dd($users);
         return view('employee.list',compact('users'));
     }
     
@@ -68,29 +67,42 @@ class HomeController extends Controller
             return redirect('/home')->with('error', 'New support ticket has been created! Wait sometime to get resolved');
         }        
     }
+    
+    public function update(Request $request,$id)
+    {
+        $request->validate(['name'=>'required',
+                            "department_id" => '',
+                            'email'=> 'required',
+                            "phone" => '']);
 
-    public function updateUser(Request $request, $id)
-    {   
-        $user = new User();
-        $data = $this->validate($request, [
-                                            'name'=>'required',
-                                            'email'=> 'required',
-                                            "department_id" => '',
-                                            "phone" => ''
-                                        ]);
-        $data['id'] = $id;
-        $user->updateUser($data);
-        return redirect()
-            ->route('employee.list')
-            //->route('empsingleview',$id)
-            ->with('success','Updated the selected Employee!');
+        $user = User::find($id);
+        $user->name = $request->get('name');
+        $user->department_id = $request->get('department_id');
+        $user->email = $request->get('email');
+        $user->phone = $request->get('phone');
+
+        if($user->save()){
+            return redirect()->route('employee.list')->with('success', 'New Employee Created..');
+        }else{
+            return redirect()->route('employee.list')->with('error', 'New support ticket has been created! Wait sometime to get resolved');
+        }
     }
-
+    
     public function viewUser($id)
     {   
         $department = Departments::where('status',1)->get();
         $user = User::findOrFail($id);
         return view('employee.single',compact('department','user'));
+    }
+
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        if($user->delete()){
+            return redirect()->route('employee.list')->with('success', 'Employee Deleted..');
+        }else{
+            return redirect()->route('employee.list')->with('error', 'Error');
+        }        
     }
 
 }
