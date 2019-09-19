@@ -14,9 +14,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $fillable = ['name', 'email', 'password','department_id','phone'];
 
    protected $table = 'users'; 
 
@@ -29,17 +27,19 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function saveUser($data)
-    {
-        //$this->user_id = auth()->user()->id;
-        $this->name = $data['name'];
-        $this->role = $data['role'];
-        $this->email = $data['email'];
-        $this->phone = $data['phone'];
-        $this->password = $data['password'];
-        $this->save();
+    
+    public function updateUser($data)
+    {   
+        $user = $this->find($data['id']);
+        $user->name = $data['name'];
+        $user->department_id = $data['department_id'];
+        $user->email = $data['email'];
+        $user->phone = $data['phone'];
+        $user->save();
         return 1;
     }
+
+    
 
     public function departments(){
         return $this->hasOne('App\Departments','id','department_id');            

@@ -46,35 +46,40 @@ class HomeController extends Controller
     }
 
     public function store(Request $request)
-    {
+    {   
         //dd($request->input());
-        
-  
-        $user = new User();
-        $data = $this->validate($request, [
-            'name'=>'required',
-            'email'=> 'required',
-            'password' => '',
-            "role" => '',
-            "phone" => ''
+        $request->validate(['name'=>'required',
+                            "department_id" => '',
+                            'email'=> 'required',
+                            'password' => '',                                        
+                            "phone" => '']);
+
+        $user = new User([
+            'name' => $request->get('name'),
+            'department_id' => $request->get('department_id'),
+            'email' => $request->get('email'),
+            'phone' => $request->get('phone'),
+            'password' => $request->get('password')
         ]);
-       
-        $user->saveUser($data);
-        return redirect('/home')->with('success', 'New support ticket has been created! Wait sometime to get resolved');
+        
+        if($user->save()){
+            return redirect('/home')->with('success', 'New Employee Created..');
+        }else{
+            return redirect('/home')->with('error', 'New support ticket has been created! Wait sometime to get resolved');
+        }        
     }
 
     public function updateUser(Request $request, $id)
     {   
-        //echo $id;
-        //dd($request->input());        
-        $user = User::findOrFail($id);
-        $user->name = $request->name;
-        $user->department_id = $request->department_id;
-        $user->email = $request->email;
-        $user->phone = $request->phone;       
-        
-        $user->save(); //Can be used for both creating and updating
-        //Redirect to a specified route with flash message.
+        $user = new User();
+        $data = $this->validate($request, [
+                                            'name'=>'required',
+                                            'email'=> 'required',
+                                            "department_id" => '',
+                                            "phone" => ''
+                                        ]);
+        $data['id'] = $id;
+        $user->updateUser($data);
         return redirect()
             ->route('employee.list')
             //->route('empsingleview',$id)

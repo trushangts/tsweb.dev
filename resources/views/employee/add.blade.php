@@ -29,11 +29,11 @@
                         </div>
 
                         <div class="row">
-                           <label class="col-sm-2 col-form-label">Role</label>
+                           <label class="col-sm-2 col-form-label">Department</label>
                            <div class="col-sm-10">
                               <div class="form-group bmd-form-group">
                                  <div class="dropdown bootstrap-select">
-                                    <select class="selectpicker" name="role" id="role" data-style="select-with-transition"  title="Choose Department" data-size="7" tabindex="-98">
+                                    <select class="selectpicker" name="department_id" id="department_id" data-style="select-with-transition"  title="Choose Department" data-size="7" tabindex="-98">
                                        <option disabled=""> Select Options</option>
                                        @foreach($department as $d)
                                        <option value="{{$d->id}}">{{$d->name}}</option>
