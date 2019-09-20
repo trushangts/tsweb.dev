@@ -61,6 +61,9 @@ class HomeController extends Controller
             'password' => $request->get('password')
         ]);
         
+        $fileName = "fileName".time().'.'.request()->eimg->getClientOriginalExtension();
+        $request->eimg->storeAs('eimg',$fileName);
+        $user->photo = $fileName;
         if($user->save()){
             return redirect('/home')->with('success', 'New Employee Created..');
         }else{
